@@ -15,6 +15,14 @@ def histogram():
         else:
             dictionary[word] = 1
 
-    print(dictionary)
+    return dictionary
 
-histogram()
+def unique_words(histogram):
+    '''A function that takes a histogram argument and returns the total count 
+    of unique words in the histogram'''
+
+    return len(histogram)
+
+
+histo = histogram()
+print(unique_words(histo))
