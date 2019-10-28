@@ -26,11 +26,11 @@ def unique_words(histogram):
             count += 1
 
 def frequency (word, histogram):
-    '''A function that takes a word and histogram argument and returns the 
+    '''A function that takes a given word and histogram argument and returns the 
     number of times that word appears in a text'''
 
-    for word in histogram:
-        print (word)
+    return histogram.get(word, 0)
 
 histo = histogram()
-print(unique_words(histo))
+print (frequency ('I', histo))
+
