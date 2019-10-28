@@ -20,9 +20,17 @@ def histogram():
 def unique_words(histogram):
     '''A function that takes a histogram argument and returns the total count 
     of unique words in the histogram'''
+    count = 0
+    for word in histogram.keys():
+        if histogram.get(word) == 1:
+            count += 1
 
-    return len(histogram)
+def frequency (word, histogram):
+    '''A function that takes a word and histogram argument and returns the 
+    number of times that word appears in a text'''
 
+    for word in histogram:
+        print (word)
 
 histo = histogram()
 print(unique_words(histo))
