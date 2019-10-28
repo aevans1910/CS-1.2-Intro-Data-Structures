@@ -29,8 +29,9 @@ def frequency (word, histogram):
     '''A function that takes a given word and histogram argument and returns the 
     number of times that word appears in a text'''
 
-    return histogram.get(word, 0)
+    return histogram.get(word)
 
-histo = histogram()
-print (frequency ('I', histo))
+if __name__ == "__main__":
+    histo = histogram()
+    print (frequency ('I', histo))
 
