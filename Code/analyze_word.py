@@ -17,6 +17,27 @@ def histogram():
 
     return dictionary
 
+def list_histogram():
+    ''' A function that return a histogram data structure that stores each unique 
+    word along with the number of times the word appears in the source text, but 
+    instead of using a dictionary, it uses a list'''
+
+    file = 'Grim-tales.txt'
+
+    with open(file, 'r') as f:
+        text = f.read().split()
+
+    histogram_list = []
+    for word in text:
+        list_word = [word, 0]
+        for word2 in text:
+            if word == word2:
+                list_word[1] += 1
+        if list_word not in histogram_list:
+            histogram_list.append(list_word)
+
+    return histogram_list
+
 def unique_words(histogram):
     '''A function that takes a histogram argument and returns the total count 
     of unique words in the histogram'''
@@ -32,6 +53,6 @@ def frequency (word, histogram):
     return histogram.get(word)
 
 if __name__ == "__main__":
-    histo = histogram()
+    histo = list_histogram()
     print (frequency ('I', histo))
 
