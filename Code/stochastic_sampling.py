@@ -24,22 +24,23 @@ def histogram(get_text):
 
 def sample_frequency(histogram):
     '''A function that takes a histogram and returns a single word, at random'''
-    
-    words_list = []
+    dart = random.randint(0,7)
+    left_fence = 0
 
-    for key in histogram:
-        for _ in range(histogram[key]):
-            words_list.append(key)
+    for word, count in histogram.items():
+        right_fence = left_fence + count
 
-    random_word = random.choice(words_list)
-    return (random_word)
+        if left_fence <= dart < right_fence:
+            return word
+        left_fence = right_fence
+        
 
 if __name__ == '__main__':
     histo = histogram(get_text())
 
     results = []
 
-    for counter in range(100):
+    for counter in range(10):
         random_word = sample_frequency(histo)
         results.append(random_word)
 
