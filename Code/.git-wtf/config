@@ -1,0 +1,13 @@
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = false
+	logallrefupdates = true
+	ignorecase = true
+	precomposeunicode = true
+[remote "heroku"]
+	url = https://git.heroku.com/generate-tweets.git
+	fetch = +refs/heads/*:refs/remotes/heroku/*
+[remote "origin"]
+	url = git@github.com:aevans1910/CS-1.2-Intro-Data-Structures.git
+	fetch = +refs/heads/*:refs/remotes/origin/*
