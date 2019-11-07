@@ -1,10 +1,10 @@
 from flask import Flask
-import stochastic_sampling
+import sample
 app = Flask(__name__)
 
 @app.route('/')
 def sampling():
-    histo = stochastic_sampling.histogram(stochastic_sampling.get_text())
-    random_words = stochastic_sampling.sample_frequency(histo)
+    histo = sample.histogram(sample.get_text())
+    random_words = sample.sample_frequency(histo)
     
     return random_words
