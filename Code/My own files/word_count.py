@@ -54,5 +54,6 @@ def frequency (word, histogram):
 
 if __name__ == "__main__":
     histo = list_histogram()
+    #This code checks the frequency of the word 'I' within the text provided
     print (frequency ('I', histo))
 

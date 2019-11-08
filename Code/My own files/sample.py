@@ -24,16 +24,19 @@ def histogram(get_text):
 
 def sample_frequency(histogram):
     '''A function that takes a histogram and returns a single word, at random'''
-    dart = random.randint(0,7)
-    left_fence = 0
+    #This function randomly selects a word in the list
+    random_word = random.randint(0,7)
+    start_search_range = 0
 
     for word, count in histogram.items():
-        right_fence = left_fence + count
-
-        if left_fence <= dart < right_fence:
+        end_search_range = start_search_range + count
+        #Function goes through each range of possible frequencies in the list, and tries to 
+        #match where the word selected is within the range
+        if start_search_range <= random_word < end_search_range:
             return word
-        left_fence = right_fence
-        
+            # If the word is indeed within the range, then the word is returned
+        start_search_range = end_search_range
+        #If word not found,the search continues
 
 if __name__ == '__main__':
     histo = histogram(get_text())
