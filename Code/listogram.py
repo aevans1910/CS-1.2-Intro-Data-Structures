@@ -21,25 +21,64 @@ class Listogram(list):
     def add_count(self, word, count=1):
         """Increase frequency count of given word by given count amount."""
         # TODO: Increase word frequency by count
+        for item in self:
+            if item[0] == word:
+                item[1] += count
+                self.tokens += count
+                return
+        
+            else:
+                self.append([word, count])
+                self.types += 1
+        
+            self.token += count
+
+
 
     def frequency(self, word):
         """Return frequency count of given word, or 0 if word is not found."""
         # TODO: Retrieve word frequency count
+        for item in self:
+            if item[0] == word:
+                return item[1]
+        return 0
 
     def __contains__(self, word):
         """Return boolean indicating if given word is in this histogram."""
         # TODO: Check if word is in this histogram
+        for item in self:
+            if word == item[0]:
+                return True
+        return False
 
     def index_of(self, target):
         """Return the index of entry containing given target word if found in
         this histogram, or None if target word is not found."""
         # TODO: Implement linear search to find index of entry with target word
+        for item in self:
+            if item[0] == target:
+                return self.index(item)
+        return None
 
     def sample(self):
         """Return a word from this histogram, randomly sampled by weighting
         each word's probability of being chosen by its observed frequency."""
         # TODO: Randomly choose a word based on its frequency in this histogram
+        random_word = random.random()
+        word_bank = []
+        start_search_range = 0
 
+        for word in self:
+            weight = word[1] / self.tokens
+            word_bank.append([word[0], [start_search_range, start_search_range + weight]])
+            start_search_range += weight
+
+        for index in range(len(word_bank)):
+            count = 0
+            end_search_range = start_search_range + count
+            if start_search_range <= random_word < end_search_range:
+                return word_bank[index]
+            start_search_range = end_search_range
 
 def print_histogram(word_list):
     print()
