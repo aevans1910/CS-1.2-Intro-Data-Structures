@@ -25,7 +25,6 @@ class Dictogram(dict):
             self[word] = count
             self.types += 1
         else:
-            count += 1
             self[word] += count
         
         self.tokens += count
@@ -50,11 +49,8 @@ class Dictogram(dict):
             start_search_range += weight
 
         for word in word_bank:
-            count = 0
-            end_search_range = start_search_range + count
-            if start_search_range <= random_word < end_search_range:
+            if word_bank[word][0] < random_word and word_bank[word][1] > random_word:
                 return word
-            start_search_range = end_search_range
 
 def print_histogram(word_list):
     print()
