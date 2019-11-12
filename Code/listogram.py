@@ -27,13 +27,9 @@ class Listogram(list):
                 self.tokens += count
                 return
         
-            else:
-                self.append([word, count])
-                self.types += 1
-        
-            self.token += count
-
-
+        self.append([word, count])
+        self.types += 1
+        self.tokens += count
 
     def frequency(self, word):
         """Return frequency count of given word, or 0 if word is not found."""
@@ -74,11 +70,8 @@ class Listogram(list):
             start_search_range += weight
 
         for index in range(len(word_bank)):
-            count = 0
-            end_search_range = start_search_range + count
-            if start_search_range <= random_word < end_search_range:
-                return word_bank[index]
-            start_search_range = end_search_range
+            if word_bank[index][1][0] < random_word and word_bank[index][1][1] > random_word:
+                return word_bank[index][0]
 
 def print_histogram(word_list):
     print()
