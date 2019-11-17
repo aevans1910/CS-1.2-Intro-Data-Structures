@@ -38,6 +38,31 @@ def list_histogram():
 
     return histogram_list
 
+def tuple_histogram():
+    ''' A function that return a histogram data structure that stores each unique 
+    word along with the number of times the word appears in the source text, but 
+    instead of using a dictionary, it uses tuples'''
+
+    file = 'Grim-tales.txt'
+
+    with open(file, 'r') as f:
+        text = f.read().split()
+
+    histogram_tuple = []
+    in_tuple = False
+
+    for word in text:
+        for word2 in histogram_tuple:
+            if word == word2[0]:
+                in_tuple = True
+                histogram_tuple.append((word, word2[1]+1))
+                histogram_tuple.remove(word2)
+        if in_tuple == False:
+            histogram_tuple.append((word, 1))
+        
+    return histogram
+
+
 def unique_words(histogram):
     '''A function that takes a histogram argument and returns the total count 
     of unique words in the histogram'''
