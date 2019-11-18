@@ -54,8 +54,9 @@ class LinkedList(object):
 
     def length(self):
         """Return the length of this linked list by traversing its nodes.
-        TODO: Running time: O(???) Why and under what conditions?"""
-        # TODO: Loop through all nodes and count one for each
+        Best and worst case running time: O(n) for n items in the list (length)
+        because we always need to loop through all n nodes to get each item."""
+        #Loop through all nodes and count one for each
         count = 0
         current = self.head  
 
@@ -68,9 +69,10 @@ class LinkedList(object):
 
     def append(self, item):
         """Insert the given item at the tail of this linked list.
-        TODO: Running time: O(???) Why and under what conditions?"""
-        # TODO: Create new node to hold given item
-        # TODO: Append node after tail, if it exists
+        Running time: O(n) for n items in the list (length)
+        because we always need to loop through all n nodes to get each item."""
+        # Create new node to hold given item
+        # Append node after tail, if it exists
         if self.head == None:
             new_node = Node(item)
             self.head = new_node
@@ -84,9 +86,10 @@ class LinkedList(object):
 
     def prepend(self, item):
         """Insert the given item at the head of this linked list.
-        TODO: Running time: O(???) Why and under what conditions?"""
-        # TODO: Create new node to hold given item
-        # TODO: Prepend node before head, if it exists
+        Running time: O(1) because in each case there is only one thing to check 
+        and therefore to iterate over"""
+        # Create new node to hold given item
+        # Prepend node before head, if it exists
         if self.head == None:
             new_node = Node(item)
             self.head = new_node
@@ -99,8 +102,10 @@ class LinkedList(object):
 
     def find(self, quality):
         """Return an item from this linked list satisfying the given quality.
-        TODO: Best case running time: O(???) Why and under what conditions?
-        TODO: Worst case running time: O(???) Why and under what conditions?"""
+        Best case running time: O(1) If there is no head, then there is only one
+        thing to check and iterate over.
+        Worst case running time: O(n) for n items in the list (length)
+        because we always need to loop through all n nodes to get each item."""
         # TODO: Loop through all nodes to find item where quality(item) is True
         # TODO: Check if node's data satisfies given quality function
         if self.head == None:
