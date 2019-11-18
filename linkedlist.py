@@ -106,8 +106,8 @@ class LinkedList(object):
         thing to check and iterate over.
         Worst case running time: O(n) for n items in the list (length)
         because we always need to loop through all n nodes to get each item."""
-        # TODO: Loop through all nodes to find item where quality(item) is True
-        # TODO: Check if node's data satisfies given quality function
+        # Loop through all nodes to find item where quality(item) is True
+        # Check if node's data satisfies given quality function
         if self.head == None:
             return NotImplemented
 
