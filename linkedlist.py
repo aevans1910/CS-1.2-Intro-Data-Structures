@@ -126,44 +126,29 @@ class LinkedList(object):
         # TODO: Update previous node to skip around node with matching data
         # TODO: Otherwise raise error to tell user that delete has failed
         # Hint: raise ValueError('Item not found: {}'.format(item))
-        saved_next = current.next
-        saved_previous.next = saved_next
-        saved_previous = self.head
-        current = self.head.next
+        current = self.head
+        saved_previous = None
 
         while current.next != None:
-            if (current.data == item):
-                saved_next = current.next
-                saved_previous.next = saved_next
-            saved_previous = current
-            current = current.next                
+            if current.data == item:
+                if saved_previous == None:
+                    self.head = current.next
+
+                    if current.next == None:
+                        self.tail = saved_previous
+
+                elif current.next == None:
+                    saved_previous.next = None
+                    self.tail = saved_previous
+
+                else:
+                    saved_previous.next = current.next
+
+        raise ValueError('Item not found: {}'.format(item))              
 
 def test_linked_list():
     ll = LinkedList()
     print('list: {}'.format(ll))
-
-    '''print('\nTesting append:')
-    for item in ['A', 'B', 'C']:
-        print('append({!r})'.format(item))
-        ll.append(item)
-        print('list: {}'.format(ll))
-
-    print('head: {}'.format(ll.head))
-    print('tail: {}'.format(ll.tail))
-    print('length: {}'.format(ll.length()))
-
-    # Enable this after implementing delete method
-    delete_implemented = False
-    if delete_implemented:
-        print('\nTesting delete:')
-        for item in ['B', 'C', 'A']:
-            print('delete({!r})'.format(item))
-            ll.delete(item)
-            print('list: {}'.format(ll))
-
-        print('head: {}'.format(ll.head))
-        print('tail: {}'.format(ll.tail))
-        print('length: {}'.format(ll.length()))'''
 
     print('\nTesting append:')
     for item in ['A', 'B', 'C']:
@@ -180,6 +165,23 @@ def test_linked_list():
     print('length: {}'.format(ll.length()))
 
     print(ll.find ('a'))
+
+    print('head: {}'.format(ll.head))
+    print('tail: {}'.format(ll.tail))
+    print('length: {}'.format(ll.length()))
+
+    # Enable this after implementing delete method
+    delete_implemented = True
+    if delete_implemented:
+        print('\nTesting delete:')
+        for item in ['B', 'C', 'A']:
+            print('delete({!r})'.format(item))
+            ll.delete(item)
+            print('list: {}'.format(ll))
+
+        print('head: {}'.format(ll.head))
+        print('tail: {}'.format(ll.tail))
+        print('length: {}'.format(ll.length()))
 
 if __name__ == '__main__':
     test_linked_list()
