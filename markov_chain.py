@@ -13,18 +13,19 @@ class MarkovChain(dict):
 
     def create_markov_chain(self, words_list):
         '''Creating the markov chain'''
-        for index, word in enumerate(words_list):
-
+        previous = None
+        for word in words_list:
             #This first part checks if the word is already in
             #the histogram
             if self.get(word) == None:
                 self[word] = Dictogram()
+            if previous != None:
+                if self[previous][word] != None:
+                    self[previous][word] += 1
+                if self[previous][word] == None:
+                    self[previous][word] = 1
+            previous = word
 
-            #This second part makes sure that the range 
-            #stays within the limits of the text
-            if index + 1 < len(words_list) - 1:
-                next_word = words_list[index + 1]
-                self.get(word).add_count(next_word)
 
     def sample(self, word):
         '''Samples a word from histogram with '''
