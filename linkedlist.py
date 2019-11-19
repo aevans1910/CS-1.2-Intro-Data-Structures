@@ -56,11 +56,12 @@ class LinkedList(object):
         """Return the length of this linked list by traversing its nodes.
         Best and worst case running time: O(n) for n items in the list (length)
         because we always need to loop through all n nodes to get each item."""
-        #Loop through all nodes and count one for each
         count = 0
         current = self.head  
 
-        while current.next is not None:  
+        #While there are still more nodes after the one we are currently on
+        while current.next is not None: 
+            #Move to the next node, add 1 to the counter 
             current = current.next
             count += 1
         
@@ -71,14 +72,15 @@ class LinkedList(object):
         """Insert the given item at the tail of this linked list.
         Running time: O(n) for n items in the list (length)
         because we always need to loop through all n nodes to get each item."""
-        # Create new node to hold given item
-        # Append node after tail, if it exists
+        #If there are no nodes yet, create one
         if self.head == None:
             new_node = Node(item)
             self.head = new_node
 
         if self.head != None:
             current = self.head  
+            #While there are still nodes after the one we are currently on,
+            #append the next node to the one we are currently on
             while current.next is not None:  
                 current = current.next
             new_node = Node(item)
@@ -89,11 +91,11 @@ class LinkedList(object):
         Running time: O(1) because in each case there is only one thing to check 
         and therefore to iterate over"""
         # Create new node to hold given item
-        # Prepend node before head, if it exists
         if self.head == None:
             new_node = Node(item)
             self.head = new_node
 
+        # Prepend node before head, if it exists
         if self.head != None:
             new_node = Node(item)
             old_head = self.head
@@ -106,14 +108,15 @@ class LinkedList(object):
         thing to check and iterate over.
         Worst case running time: O(n) for n items in the list (length)
         because we always need to loop through all n nodes to get each item."""
-        # Loop through all nodes to find item where quality(item) is True
-        # Check if node's data satisfies given quality function
+        #If there are no nodes, return empty
         if self.head == None:
             return NotImplemented
 
         if self.head != None:
             current = self.head
+            # Loop through all nodes
             while current.next != None:
+                # Check if node's data satisfies given quality function
                 if (current.data == quality):
                     return current.data
                 current = current.next
@@ -122,29 +125,43 @@ class LinkedList(object):
         """Delete the given item from this linked list, or raise ValueError.
         TODO: Best case running time: O(???) Why and under what conditions?
         TODO: Worst case running time: O(???) Why and under what conditions?"""
-        # TODO: Loop through all nodes to find one whose data matches given item
-        # TODO: Update previous node to skip around node with matching data
-        # TODO: Otherwise raise error to tell user that delete has failed
-        # Hint: raise ValueError('Item not found: {}'.format(item))
+        #If there are no nodes
+        if self.length() == 0:
+            raise ValueError('Item not found: {}'.format(item))
+        
         current = self.head
         saved_previous = None
 
+        found = False
+        #Until there are no more nodes after the one we are currently on
         while current.next != None:
+            #If the one we are currently on is the one we are looking for
             if current.data == item:
+                saved_previous.next = current.next
+                found = True
+                #If there are no previous nodes
                 if saved_previous == None:
+                    #The node we are on becomes the head
                     self.head = current.next
-
+                    #If there are no more nodes after the one that we are on
                     if current.next == None:
+                        #This one becomes the tail as well
                         self.tail = saved_previous
 
+                #If there is a previous node but not a next one
                 elif current.next == None:
+                    #The node we are on is deleted and the node before the one
+                    #that was deleted becomes the tail
                     saved_previous.next = None
                     self.tail = saved_previous
 
-                else:
-                    saved_previous.next = current.next
+                #If the node we are deleting is neither the tail nor the head
+            saved_previous = current
+            current = current.next
 
-        raise ValueError('Item not found: {}'.format(item))              
+        #If there are no more nodes
+        if found == False:
+            raise ValueError('Item not found: {}'.format(item))              
 
 def test_linked_list():
     ll = LinkedList()
