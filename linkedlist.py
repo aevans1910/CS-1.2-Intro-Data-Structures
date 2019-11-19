@@ -56,14 +56,19 @@ class LinkedList(object):
         """Return the length of this linked list by traversing its nodes.
         Best and worst case running time: O(n) for n items in the list (length)
         because we always need to loop through all n nodes to get each item."""
-        count = 1
+        count = 0
         current = self.head  
 
+        if self.head == None:
+            return 0
         #While there are still more nodes after the one we are currently on
+        count = 1
         while current.next is not None: 
             #Move to the next node, add 1 to the counter 
             current = current.next
             count += 1
+        
+        
         
         print(count)
         return count
@@ -76,15 +81,15 @@ class LinkedList(object):
         if self.head == None:
             new_node = Node(item)
             self.head = new_node
+            self.tail = new_node
 
-        if self.head != None:
-            current = self.head  
+        elif self.head != None:
+            current = self.tail
             #While there are still nodes after the one we are currently on,
             #append the next node to the one we are currently on
-            while current.next is not None:  
-                current = current.next
             new_node = Node(item)
             current.next = new_node
+            self.tail = new_node
 
     def prepend(self, item):
         """Insert the given item at the head of this linked list.
@@ -94,9 +99,10 @@ class LinkedList(object):
         if self.head == None:
             new_node = Node(item)
             self.head = new_node
+            self.tail = new_node
 
         # Prepend node before head, if it exists
-        if self.head != None:
+        elif self.head != None:
             new_node = Node(item)
             old_head = self.head
             self.head = new_node
@@ -115,9 +121,9 @@ class LinkedList(object):
         if self.head != None:
             current = self.head
             # Loop through all nodes
-            while current.next != None:
+            while current != None:
                 # Check if node's data satisfies given quality function
-                if (current.data == quality):
+                if (quality(current.data)):
                     return current.data
                 current = current.next
 
@@ -135,7 +141,7 @@ class LinkedList(object):
         saved_previous = None
 
         #Until there are no more nodes after the one we are currently on
-        while current.next != None:
+        while current != None:
             #If the one we are currently on is the one we are looking for
             if current.data == item:
                 if current.next != None:
