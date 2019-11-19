@@ -56,7 +56,7 @@ class LinkedList(object):
         """Return the length of this linked list by traversing its nodes.
         Best and worst case running time: O(n) for n items in the list (length)
         because we always need to loop through all n nodes to get each item."""
-        count = 0
+        count = 1
         current = self.head  
 
         #While there are still more nodes after the one we are currently on
