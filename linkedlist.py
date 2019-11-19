@@ -134,42 +134,34 @@ class LinkedList(object):
         current = self.head
         saved_previous = None
 
-        found = False
         #Until there are no more nodes after the one we are currently on
         while current.next != None:
             #If the one we are currently on is the one we are looking for
             if current.data == item:
-                saved_previous.next = current.next
-                found = True
-                #If there are no previous nodes
-                if saved_previous == None:
-                    #The node we are on becomes the head
-                    self.head = current.next
-                    #If there are no more nodes after the one that we are on
-                    if current.next == None:
-                        #This one becomes the tail as well
+                if current.next != None:
+                    if saved_previous != None:
+                        saved_previous.next = current.next
+                    if saved_previous == None:
+                        self.head = current.next
+                    current.next = None
+                    return
+                if current.next == None:
+                    if saved_previous != None:
+                        saved_previous.next = None
                         self.tail = saved_previous
-
-                #If there is a previous node but not a next one
-                elif current.next == None:
-                    #The node we are on is deleted and the node before the one
-                    #that was deleted becomes the tail
-                    saved_previous.next = None
-                    self.tail = saved_previous
-
-                #If the node we are deleting is neither the tail nor the head
+                    if saved_previous == None:
+                        self.head = None
+                        self.tail = None
+                    return
             saved_previous = current
             current = current.next
-
-        #If there are no more nodes
-        if found == False:
-            raise ValueError('Item not found: {}'.format(item))              
+        raise ValueError('Item not found: {}'.format(item))              
 
 def test_linked_list():
     ll = LinkedList()
     print('list: {}'.format(ll))
 
-    print('\nTesting append:')
+    print('\nTesting append:') 
     for item in ['A', 'B', 'C']:
         print('append({!r})'.format(item))
         ll.append(item)
