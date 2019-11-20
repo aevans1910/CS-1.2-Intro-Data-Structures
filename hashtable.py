@@ -6,7 +6,7 @@ from linkedlist import LinkedList
 class HashTable(object):
 
     def __init__(self, init_size=8):
-        """Initialize this hash table with the given initial size."""
+        """Initialize this hash table with the given initial size of 8"""
         # Create a new list (used as fixed-size array) of empty linked lists
         self.buckets = [LinkedList() for _ in range(init_size)]
 
@@ -26,7 +26,8 @@ class HashTable(object):
 
     def keys(self):
         """Return a list of all keys in this hash table.
-        TODO: Running time: O(???) Why and under what conditions?"""
+        TODO: Running time: O(n^2) because we need to iterate over all of the items in
+        two seperate loops ingrained into each other"""
         # Collect all keys in each bucket
         all_keys = []
         for bucket in self.buckets:
@@ -36,13 +37,19 @@ class HashTable(object):
 
     def values(self):
         """Return a list of all values in this hash table.
-        TODO: Running time: O(???) Why and under what conditions?"""
+        TODO: Running time: O(n^2) because we need to iterate over all of the items in
+        two seperate loops ingrained into each other"""
         # TODO: Loop through all buckets
         # TODO: Collect all values in each bucket
+        all_values = []
+        for bucket in self.buckets:
+            for key, value in bucket.items():
+                all_values.append(value)
+        return all_values
 
     def items(self):
         """Return a list of all items (key-value pairs) in this hash table.
-        TODO: Running time: O(???) Why and under what conditions?"""
+        TODO: Running time: O(n) Why and under what conditions?"""
         # Collect all pairs of key-value entries in each bucket
         all_items = []
         for bucket in self.buckets:
