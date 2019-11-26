@@ -129,10 +129,10 @@ class LinkedList(object):
 
     def delete(self, item):
         """Delete the given item from this linked list, or raise ValueError.
-        Best case running time: O(n) because in the best case scenario, there are
-        no nested loops and if statements take constant time
-        Worst case running time: O(n^2) because in all other scenarios there are many
-        items that need to be iterated over in a few diffrent loops"""
+        Best case running time: O(1) if there is nothing in the linked list or if
+        we are deleting the head node
+        Worst case running time: O(n) because in the best case scenario, there are
+        no nested loops and if statements take constant time"""
         #If there are no nodes
         if self.length() == 0:
             raise ValueError('Item not found: {}'.format(item))
