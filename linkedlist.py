@@ -127,6 +127,30 @@ class LinkedList(object):
                     return current.data
                 current = current.next
 
+    def replace(self, item_replacing, value_replacing):
+        """Return an item from this linked list satisfying the given quality.
+        Best case running time: O(1) If there is no head, then there is only one
+        thing to check and iterate over, or if we are replacing the head
+        Worst case running time: O(n) for n items in the list (length)
+        because we always need to loop through all n nodes to get each item"""
+        #If there are no nodes, return empty
+        if self.head == None:
+            return NotImplemented
+
+        if self.head != None:
+            current = self.head
+            # Loop through all nodes
+            while current != None:
+                # Check if node's data satisfies given quality function
+                if current.data == item_replacing:
+                    current.data = value_replacing
+                    return
+
+                current = current.next
+
+            #If item we want to replace isn't found
+            raise ValueError('Item not found: {}'.format(item_replacing))
+
     def delete(self, item):
         """Delete the given item from this linked list, or raise ValueError.
         Best case running time: O(1) if there is nothing in the linked list or if
