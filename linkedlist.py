@@ -75,8 +75,8 @@ class LinkedList(object):
 
     def append(self, item):
         """Insert the given item at the tail of this linked list.
-        Running time: O(n) for n items in the list (length)
-        because we always need to loop through all n nodes to get each item."""
+        Running time: O(1) because there is a reference to the tail and there is
+        no looping through anything"""
         #If there are no nodes yet, create one
         if self.head == None:
             new_node = Node(item)
@@ -129,8 +129,8 @@ class LinkedList(object):
 
     def delete(self, item):
         """Delete the given item from this linked list, or raise ValueError.
-        Best case running time: O(1) because in the best case scenario, there are
-        no nodes and therefore only one task has to be executed
+        Best case running time: O(n) because in the best case scenario, there are
+        no nested loops and if statements take constant time
         Worst case running time: O(n^2) because in all other scenarios there are many
         items that need to be iterated over in a few diffrent loops"""
         #If there are no nodes
@@ -147,15 +147,15 @@ class LinkedList(object):
                 if current.next != None:
                     if saved_previous != None:
                         saved_previous.next = current.next
-                    if saved_previous == None:
+                    elif saved_previous == None:
                         self.head = current.next
                     current.next = None
                     return
-                if current.next == None:
+                elif current.next == None:
                     if saved_previous != None:
                         saved_previous.next = None
                         self.tail = saved_previous
-                    if saved_previous == None:
+                    elif saved_previous == None:
                         self.head = None
                         self.tail = None
                     return
