@@ -92,7 +92,7 @@ class HashTable(object):
         # Hint: raise KeyError('Key not found: {}'.format(key))
         bucket_index = hash(key) % len(self.buckets)
         bucket = self.buckets[bucket_index]
-        
+
         for my_key, value in bucket.items():
             if key == my_key:
                 return value
@@ -106,6 +106,13 @@ class HashTable(object):
         # TODO: Check if key-value entry exists in bucket
         # TODO: If found, update value associated with given key
         # TODO: Otherwise, insert given key-value entry into bucket
+        bucket_index = hash(key) % len(self.buckets)
+        bucket = self.buckets[bucket_index]
+
+        try:
+            bucket.replace(key, value)
+        except ValueError:
+            bucket.append((key, value))
 
     def delete(self, key):
         """Delete the given key from this hash table, or raise KeyError.
