@@ -110,14 +110,18 @@ class HashTable(object):
         # TODO: Check if key-value entry exists in bucket
         # TODO: If found, update value associated with given key
         # TODO: Otherwise, insert given key-value entry into bucket
-        bucket_index = hash(key) % len(self.buckets)
-        bucket = self.buckets[bucket_index]
+        # bucket_index = hash(key) % len(self.buckets)
+        bucket = self.buckets[self._bucket_index(key)]
+        print("Index of bucket: {}".format(self._bucket_index(key)))
 
         if bucket.length() != 0:
-            try:
-                bucket.replace(key, value)
-            except ValueError:
-                bucket.append((key, value))
+            for node in bucket:
+                if node.data[0] == key:
+                    node.data = ((key, value))
+                    return
+                else:
+                    bucket.append((key, value))
+        else: bucket.append((key, value))
 
     def delete(self, key):
         """Delete the given key from this hash table, or raise KeyError.
@@ -157,7 +161,7 @@ def test_hash_table():
     print('length: {}'.format(ht.length()))
 
     # Enable this after implementing delete method
-    delete_implemented = False
+    delete_implemented = True
     if delete_implemented:
         print('\nTesting delete:')
         for key in ['I', 'V', 'X']:
