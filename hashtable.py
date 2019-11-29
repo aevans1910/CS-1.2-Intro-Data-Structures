@@ -76,9 +76,11 @@ class HashTable(object):
         bucket_index = hash(key) % len(self.buckets)
         bucket = self.buckets[bucket_index]
         
-        for my_key, value in bucket.items():
-            if key == my_key:
-                return True
+        if bucket != None:
+            for my_key, value in bucket.items():
+                if key == my_key:
+                    return True
+
         return False
                 
 
@@ -93,9 +95,11 @@ class HashTable(object):
         bucket_index = hash(key) % len(self.buckets)
         bucket = self.buckets[bucket_index]
 
-        for my_key, value in bucket.items():
-            if key == my_key:
-                return value
+        if bucket != None:
+            for my_key, value in bucket.items():
+                if key == my_key:
+                    return value
+
         raise KeyError('Key not found: {}'.format(key))
 
 
@@ -109,10 +113,11 @@ class HashTable(object):
         bucket_index = hash(key) % len(self.buckets)
         bucket = self.buckets[bucket_index]
 
-        try:
-            bucket.replace(key, value)
-        except ValueError:
-            bucket.append((key, value))
+        if bucket.length() != 0:
+            try:
+                bucket.replace(key, value)
+            except ValueError:
+                bucket.append((key, value))
 
     def delete(self, key):
         """Delete the given key from this hash table, or raise KeyError.
@@ -122,6 +127,15 @@ class HashTable(object):
         # TODO: If found, delete entry associated with given key
         # TODO: Otherwise, raise error to tell user delete failed
         # Hint: raise KeyError('Key not found: {}'.format(key))
+        bucket_index = hash(key) % len(self.buckets)
+        bucket = self.buckets[bucket_index]
+
+        if bucket != None:
+            for my_key, value in bucket.items():
+                if key == my_key:
+                    bucket.delete(key)
+        
+        raise KeyError('Key not found: {}'.format(key))
 
 
 def test_hash_table():
