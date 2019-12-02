@@ -9,6 +9,7 @@ class HashTable(object):
         """Initialize this hash table with the given initial size of 8"""
         # Create a new list (used as fixed-size array) of empty linked lists
         self.buckets = [LinkedList() for _ in range(init_size)]
+        self.length_of_hashtable = 0
 
     def __str__(self):
         """Return a formatted string representation of this hash table."""
@@ -68,6 +69,13 @@ class HashTable(object):
             for key, value in bucket.items():
                 count += 1
         return count
+
+    def length(self):
+        """Return the number of key-value entries by traversing its buckets.
+        Running time: because n is the size of the buckets aray and we just
+        have to loop over them"""
+
+        return self.length_of_hashtable
 
     def contains(self, key):
         """Return True if this hash table contains the given key, or False.
@@ -132,6 +140,8 @@ class HashTable(object):
         # Otherwise, raise error to tell user delete failed
         else:
             raise KeyError('Key not found: {}'.format(key))
+    
+    
 
 def test_hash_table():
     ht = HashTable()
@@ -162,7 +172,7 @@ def test_hash_table():
 
         print('contains(X): {}'.format(ht.contains('X')))
         print('length: {}'.format(ht.length()))
-
+    
 
 if __name__ == '__main__':
     test_hash_table()
