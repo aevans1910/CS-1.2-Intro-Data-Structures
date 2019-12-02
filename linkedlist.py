@@ -155,7 +155,7 @@ class LinkedList(object):
         """Delete the given item from this linked list, or raise ValueError.
         Best case running time: O(1) if there is nothing in the linked list or if
         we are deleting the head node
-        Worst case running time: O(n) because in the best case scenario, there are
+        Worst case running time: O(n) because there are
         no nested loops and if statements take constant time"""
         #If there are no nodes
         if self.length() == 0:

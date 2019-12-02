@@ -26,8 +26,8 @@ class HashTable(object):
 
     def keys(self):
         """Return a list of all keys in this hash table.
-        TODO: Running time: O(n^2) because we need to iterate over all of the items in
-        two seperate loops nested into one another"""
+        Running time: O(n) because n is the size of the buckets aray and we just
+        have to loop over them"""
         # Collect all keys in each bucket
         all_keys = []
         for bucket in self.buckets:
@@ -37,19 +37,20 @@ class HashTable(object):
 
     def values(self):
         """Return a list of all values in this hash table.
-        TODO: Running time: O(n^2) because we need to iterate over all of the items in
-        two seperate loops nested into one another"""
-        # TODO: Loop through all buckets
-        # TODO: Collect all values in each bucket
+        Running time: O(n) because n is the size of the buckets aray and we just
+        have to loop over them"""
         all_values = []
+        # Loop through all buckets
         for bucket in self.buckets:
+            # Collect all values in each bucket
             for my_key, my_value in bucket.items():
                 all_values.append(my_value)
         return all_values
 
     def items(self):
         """Return a list of all items (key-value pairs) in this hash table.
-        TODO: Running time: O(n) because we need to iterate over all the items in one loop"""
+        Running time: O(n) because n is the size of the buckets aray and we just
+        have to loop over them"""
         # Collect all pairs of key-value entries in each bucket
         all_items = []
         for bucket in self.buckets:
@@ -58,76 +59,77 @@ class HashTable(object):
 
     def length(self):
         """Return the number of key-value entries by traversing its buckets.
-        TODO: Running time: O(n^2) because we need to iterate over all of the items in
-        two seperate loops nested into one another"""
-        # TODO: Loop through all buckets
-        # TODO: Count number of key-value entries in each bucket
+        Running time: because n is the size of the buckets aray and we just
+        have to loop over them"""
         count = 0
+        # Loop through all buckets
         for bucket in self.buckets:
+            # Count number of key-value entries in each bucket
             for key, value in bucket.items():
                 count += 1
         return count
 
     def contains(self, key):
         """Return True if this hash table contains the given key, or False.
-        TODO: Running time: O(???) Why and under what conditions?"""
-        # TODO: Find bucket where given key belongs
-        # TODO: Check if key-value entry exists in bucket
+        Running time: O(1) because we just need to check and see if a node 
+        already exists in the bucket, it is therefore constant time"""
+        # Find bucket where given key belongs
         bucket = self.buckets[self._bucket_index(key)]
         
         if bucket != None:
             for my_key, my_value in bucket.items():
+                # Check if key-value entry exists in bucket
                 if my_key == key:
                     return True
             return False
                 
     def get(self, key):
         """Return the value associated with the given key, or raise KeyError.
-        TODO: Running time: O(???) Why and under what conditions?"""
-        # TODO: Find bucket where given key belongs
-        # TODO: Check if key-value entry exists in bucket
-        # TODO: If found, return value associated with given key
-        # TODO: Otherwise, raise error to tell user get failed
-        # Hint: raise KeyError('Key not found: {}'.format(key))
+        Running time: O(1) because we only need to find and get the value of a given
+        key, it therefore runs on constant time"""
+        # Find bucket where given key belongs
         bucket = self.buckets[self._bucket_index(key)]
 
         for my_key, my_value in bucket.items():
+            # Check if key-value entry exists in bucket
             if my_key == key:
+                # If found, return value associated with given key
                 return my_value
+        # Otherwise, raise error to tell user get failed
         raise KeyError('Key not found: {}'.format(key))
 
     def set(self, key, value):
         """Insert or update the given key with its associated value.
-        TODO: Running time: O(???) Why and under what conditions?"""
-        # TODO: Find bucket where given key belongs
-        # TODO: Check if key-value entry exists in bucket
-        # TODO: If found, update value associated with given key
-        # TODO: Otherwise, insert given key-value entry into bucket
+        Running time: O(1) because we only need to find and then replace a
+        given key, this therefore runs on constant time"""
+        # Find bucket where given key belongs
         bucket = self.buckets[self._bucket_index(key)]
 
         if self.contains(key):
             for my_key, my_value in bucket.items():
+                # Check if key-value entry exists in bucket
                 if my_key == key:
+                     # If found, update value associated with given key
                     bucket.delete((my_key, my_value))
                     bucket.append((key, value))
+        # Otherwise, insert given key-value entry into bucket
         else: 
             bucket.append((key, value))
 
     def delete(self, key):
         """Delete the given key from this hash table, or raise KeyError.
-        TODO: Running time: O(???) Why and under what conditions?"""
-        # TODO: Find bucket where given key belongs
-        # TODO: Check if key-value entry exists in bucket
-        # TODO: If found, delete entry associated with given key
-        # TODO: Otherwise, raise error to tell user delete failed
-        # Hint: raise KeyError('Key not found: {}'.format(key))
-        # bucket_index = hash(key) % len(self.buckets)
+        Running time: O(1) because we only need to find the given node and
+        delete it, it therefore runs on constant time"""
+        # Find bucket where given key belongs
         bucket = self.buckets[self._bucket_index(key)]
 
         if self.contains(key):
             for my_key, my_value in bucket.items():
+                # Check if key-value entry exists in bucket
                 if my_key == key:
+                    # If found, delete entry associated with given key
                     bucket.delete((my_key, my_value))
+        # Otherwise, raise error to tell user delete failed
         else:
             raise KeyError('Key not found: {}'.format(key))
 
