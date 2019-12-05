@@ -29,36 +29,6 @@ class MarkovChain(Dictogram):
             sentence.append(next_word)
         return ' '.join(sentence)
 
-    #     random_word = random.choice(list(self.keys))
-    #     first_word = random_word.capitalize()
-    #     words = [first_word]
-    #     other_random_words = random.choice(list(self.keys))
-
-    #     for _ in range(len - 1):
-            
-    #         other_random_words = self.sample(other_random_words)[0]
-    #         words.append(other_random_words)
-
-    #     return ' '.join(words) + '.'
-
-    #     i = 0
-    #     while 1 <= 10:
-    #         sentence.append(word)
-
-
-def clean_up_words(file_name):
-    '''Cleans up words so we can use them anywhere
-    in the sentence'''
-    with open(file_name, 'r') as f:
-        words = f.read().split()
-
-    word_list = []
-    for word in words:
-        word = word.strip(".@'/").lower()
-        word_list.append(word)
-
-    return word_list
-
 if __name__ == "__main__":
     words_list = clean_up_words('random_sentence.txt')
     markov_sentence = MarkovChain(words_list)
