@@ -32,7 +32,7 @@ class HashTable(object):
         # Collect all keys in each bucket
         all_keys = []
         for bucket in self.buckets:
-            for my_key, my_value in bucket.items():
+            for my_key, _ in bucket.items():
                 all_keys.append(my_key)
         return all_keys
 
@@ -44,7 +44,7 @@ class HashTable(object):
         # Loop through all buckets
         for bucket in self.buckets:
             # Collect all values in each bucket
-            for my_key, my_value in bucket.items():
+            for _, my_value in bucket.items():
                 all_values.append(my_value)
         return all_values
 
@@ -66,11 +66,11 @@ class HashTable(object):
         # Loop through all buckets
         for bucket in self.buckets:
             # Count number of key-value entries in each bucket
-            for key, value in bucket.items():
+            for _, _ in bucket.items():
                 count += 1
         return count
 
-    def length(self):
+    def length_other(self):
         """Return the number of key-value entries by traversing its buckets.
         Running time:O(n) because there are b buckets and l items in each
         bucket, and b*l=n"""
@@ -85,7 +85,7 @@ class HashTable(object):
         bucket = self.buckets[self._bucket_index(key)]
         
         if bucket != None:
-            for my_key, my_value in bucket.items():
+            for my_key, _ in bucket.items():
                 # Check if key-value entry exists in bucket
                 if my_key == key:
                     return True
