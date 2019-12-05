@@ -1,6 +1,23 @@
 from dictogram import Dictogram
 import random
 
+class Queue:
+    def __init__(self):
+        self.items = []
+    
+    def is_empty(self):
+        return self.items == []
+    
+    def enqueue(self, item):
+        self.items.insert(item)
+
+    def deque(self):
+        return self.items.pop(0)
+
+    def size(self):
+        return len(self.items)
+
+
 class MarkovChainSecond(Dictogram):
 
     def create_markov_chain(self):
