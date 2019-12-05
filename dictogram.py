@@ -13,6 +13,7 @@ class Dictogram(dict):
         # Add properties to track useful word counts for this histogram
         self.types = 0  # Count of distinct word types in this histogram
         self.tokens = 0  # Total count of all word tokens in this histogram
+        self.word_list = word_list
         # Count words in given list, if any
         if word_list is not None:
             for word in word_list:

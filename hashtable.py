@@ -27,8 +27,8 @@ class HashTable(object):
 
     def keys(self):
         """Return a list of all keys in this hash table.
-        Running time: O(n) because n is the size of the buckets aray and we just
-        have to loop over them"""
+        Running time: O(n) because there are b buckets and l items in each
+        bucket, and b*l=n"""
         # Collect all keys in each bucket
         all_keys = []
         for bucket in self.buckets:
@@ -38,8 +38,8 @@ class HashTable(object):
 
     def values(self):
         """Return a list of all values in this hash table.
-        Running time: O(n) because n is the size of the buckets aray and we just
-        have to loop over them"""
+        Running time: O(n) because there are b buckets and l items in each
+        bucket, and b*l=n"""
         all_values = []
         # Loop through all buckets
         for bucket in self.buckets:
@@ -50,8 +50,8 @@ class HashTable(object):
 
     def items(self):
         """Return a list of all items (key-value pairs) in this hash table.
-        Running time: O(n) because n is the size of the buckets aray and we just
-        have to loop over them"""
+        Running time: O(n) because there are b buckets and l items in each
+        bucket, and b*l=n"""
         # Collect all pairs of key-value entries in each bucket
         all_items = []
         for bucket in self.buckets:
@@ -60,8 +60,8 @@ class HashTable(object):
 
     def length(self):
         """Return the number of key-value entries by traversing its buckets.
-        Running time: because n is the size of the buckets aray and we just
-        have to loop over them"""
+        Running time: O(n) because there are b buckets and l items in each
+        bucket, and b*l=n"""
         count = 0
         # Loop through all buckets
         for bucket in self.buckets:
@@ -72,15 +72,15 @@ class HashTable(object):
 
     def length(self):
         """Return the number of key-value entries by traversing its buckets.
-        Running time: because n is the size of the buckets aray and we just
-        have to loop over them"""
+        Running time:O(n) because there are b buckets and l items in each
+        bucket, and b*l=n"""
 
         return self.length_of_hashtable
 
     def contains(self, key):
         """Return True if this hash table contains the given key, or False.
-        Running time: O(1) because we just need to check and see if a node 
-        already exists in the bucket, it is therefore constant time"""
+        Best running time: O(1) if the item we are looking for is the very first one
+        Average running time: O(l) because there are l items in the bucket"""
         # Find bucket where given key belongs
         bucket = self.buckets[self._bucket_index(key)]
         
@@ -93,8 +93,8 @@ class HashTable(object):
                 
     def get(self, key):
         """Return the value associated with the given key, or raise KeyError.
-        Running time: O(1) because we only need to find and get the value of a given
-        key, it therefore runs on constant time"""
+        Best running time: O(1) if the item we are looking for is the very first one
+        Average running time: O(l) because there are l items in the bucket"""
         # Find bucket where given key belongs
         bucket = self.buckets[self._bucket_index(key)]
 
@@ -108,8 +108,8 @@ class HashTable(object):
 
     def set(self, key, value):
         """Insert or update the given key with its associated value.
-        Running time: O(1) because we only need to find and then replace a
-        given key, this therefore runs on constant time"""
+        Best running time: O(1) if the item we are looking for is the very first one
+        Average running time: O(l) because there are l items in the bucket"""
         # Find bucket where given key belongs
         bucket = self.buckets[self._bucket_index(key)]
 
@@ -126,8 +126,8 @@ class HashTable(object):
 
     def delete(self, key):
         """Delete the given key from this hash table, or raise KeyError.
-        Running time: O(1) because we only need to find the given node and
-        delete it, it therefore runs on constant time"""
+        Best running time: O(1) if the item we are looking for is the very first one
+        Average running time: O(l) because there are l items in the bucket"""
         # Find bucket where given key belongs
         bucket = self.buckets[self._bucket_index(key)]
 
