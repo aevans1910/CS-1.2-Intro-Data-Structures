@@ -14,3 +14,13 @@ def cleanup_text(corpus):
     no_symbols = sub('([\-\()"]*)([a-z]+)([?:!.,;\-\)"]*)',r'\2', corpus)
     text = split(r'\s', no_symbols)
     return text
+
+def start_token(text):
+    '''Add a start token'''
+    text.insert(0, '#START#')
+    return text
+
+def stop_token(text):
+    '''Add a stop token'''
+    text.append('#STOP#')
+    return text
