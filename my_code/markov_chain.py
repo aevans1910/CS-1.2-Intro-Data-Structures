@@ -1,31 +1,19 @@
 from dictogram import Dictogram
 import random
 
-class MarkovChain(Dictogram):
+class MarkovChain(dict):
+    def __init__ (self, words, order=1):
+        self.order = order
+        for index in range(len(words)-1):
+            self.add_words(words[index],words[index+1])
 
-    def create_markov_chain(self):
-        '''Creating the markov chain'''
-        # Create a markov chain from histogram
-        markov_chain_histogram = Dictogram()
+        for key in self.keys():
+            self[key] = Dictogram(self[key])   
 
-        # Start counter
-        i = 0
-        # For all the words in the list of words we have
-        for word in self.word_list:
-            # Add 1 to counter
-            i += 1
-            # As long as i is less then or equal to the length of words
-            if i <= len(self.word_list)-1:
-                # The next word will be the one with the next index in the list of words
-                next_word = self.word_list[i]
-                # If the word in not yet in the histogram
-                if word not in markov_chain_histogram.keys():
-                    # Add an entry of that word in the histogram
-                    markov_chain_histogram[word] = Dictogram()
-                # If word already exsists, increase its token count by 1
-                markov_chain_histogram[word].add_count(next_word)
-            
-        return markov_chain_histogram
+    def add_words(self, word_1, word_2):
+        if not word_1 in self.keys():
+            self[word_1]=[]
+        self[word_1].append(word_2)
 
     def random_sentence(self, length=8):
         # Pick a random word from the original histogram
@@ -60,9 +48,13 @@ def clean_up_words(file_name):
     return word_list
 
 if __name__ == "__main__":
-    words_list = clean_up_words('random_sentence.txt')
+    # words_list = clean_up_words('corpus.txt')
+    words_list = ["a", "man", "a", "plan", "a", "canal"]
     markov_sentence = MarkovChain(words_list)
-    print(markov_sentence.random_sentence())
+    # print(markov_sentence)
+    for keys in markov_sentence.keys():
+        print(keys, markov_sentence[keys])
+
     # print(markov_sentence.random_sentence())
     # nested_histo = markov_sentence.create_markov_chain(words_list)
 

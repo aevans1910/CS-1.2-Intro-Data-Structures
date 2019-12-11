@@ -32,17 +32,6 @@ class MarkovChainSecond(Dictogram, Queue):
         #     markov_queue.enqueue(first)
         #     markov_queue.enqueue(second)
 
-        # i = 0
-        # for word in self.word_list:
-        #     i += 1
-        #     if i <= len(self.word_list)-1:
-        #         next_word = self.word_list[i]
-        #         if word not in markov_chain_histogram.keys():
-        #             markov_chain_histogram[word] = Dictogram()
-        #         markov_chain_histogram[word].add_count(next_word)
-            
-        # return markov_chain_histogram
-
         for i in range(len(self.word_list)-1):
             first = self.word_list[i]
             second = self.word_list[i+1]
