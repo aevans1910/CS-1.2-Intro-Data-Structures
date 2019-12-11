@@ -4,16 +4,9 @@ from re import split, sub, IGNORECASE
 def read_text(filename):
     '''Opens and reads a text file'''
     with open(filename, 'r') as f:
-        read_text_file = f.read()
+        read_text_file = f.read().split()
+    read_text_file = [item.lower() for item in read_text_file]
     return read_text_file
-
-def cleanup_text(corpus):
-    '''Cleans up text in corpus.txt. Converts all letters to lower case, takes
-    out odd symbols, and takes out punctuation'''
-    corpus = corpus.lower()
-    no_symbols = sub('([\-\()"]*)([a-z]+)([?:!.,;\-\)"]*)',r'\2', corpus)
-    text = split(r'\s', no_symbols)
-    return text
 
 def start_token(text):
     '''Add a start token'''
@@ -30,3 +23,7 @@ def stop_token(text):
 #     capitalization = " ".join(text).capitalize()
 #     sentence = f"{capitalization}."
 #     return sentence
+
+if __name__ == "__main__":
+    string = "he$l@ hbnjm .jnkm."
+    print(read_text('corpus.txt'))

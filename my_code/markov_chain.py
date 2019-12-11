@@ -1,4 +1,5 @@
 from dictogram import Dictogram
+from clean_up_text import read_text
 import random
 
 class MarkovChain(dict):
@@ -34,22 +35,9 @@ class MarkovChain(dict):
         return ' '.join(sentence)
 
 
-def clean_up_words(file_name):
-    '''Cleans up words so we can use them anywhere
-    in the sentence'''
-    with open(file_name, 'r') as f:
-        words = f.read().split()
-
-    word_list = []
-    for word in words:
-        word = word.strip(".@'/").lower()
-        word_list.append(word)
-
-    return word_list
-
 if __name__ == "__main__":
-    # words_list = clean_up_words('corpus.txt')
-    words_list = ["a", "man", "a", "plan", "a", "canal"]
+    words_list = read_text('corpus.txt')
+    # words_list = ["a", "man", "a", "plan", "a", "canal"]
     markov_sentence = MarkovChain(words_list)
     # print(markov_sentence)
     for keys in markov_sentence.keys():
