@@ -25,8 +25,8 @@ def stop_token(text):
     text.append('#STOP#')
     return text
 
-def create_sentence(text):
-    '''Makes first work capitalized'''
-    capitalization = " ".join(text).capitalize()
-    sentence = f"{capitalization}."
-    return sentence
+# def create_sentence(text):
+#     '''Makes first work capitalized'''
+#     capitalization = " ".join(text).capitalize()
+#     sentence = f"{capitalization}."
+#     return sentence

@@ -1,4 +1,5 @@
 from dictogram import Dictogram
+from clean_up_text import read_text, cleanup_text, start_token, stop_token
 import random
 
 class Queue:
@@ -46,45 +47,49 @@ class MarkovChainSecond(Dictogram, Queue):
             first = self.word_list[i]
             second = self.word_list[i+1]
 
+            if second != '#STOP#':
+                third = self.word_list[i+2]
+
             key = (first, second)
             if key not in markov_chain_histogram.keys():
                 markov_chain_histogram[key] = Dictogram()
             
-            markov_chain_histogram.get(key).add_count()
+            markov_chain_histogram.get(key).add_count(third)
 
         return markov_chain_histogram
 
 
-    def random_sentence(self, length=8):
+    def random_sentence(self, steps):
         word = self.sample()
         sentence = [word]
+        print (sentence)
 
         markov_histogram = self.create_markov_chain()
-        for _ in range(length-1):
+
+        i = 0
+        while i != steps:
+            i += 1
             next_word = markov_histogram[word].sample()
-            word = next_word
             sentence.append(next_word)
+            word = next_word
+
+            if next_word == "#STOP#":
+                break
+
         return ' '.join(sentence)
 
 
-def clean_up_words(file_name):
-    '''Cleans up words so we can use them anywhere
-    in the sentence'''
-    with open(file_name, 'r') as f:
-        words = f.read().split()
-
-    word_list = []
-    for word in words:
-        word = word.strip("_")
-        word_list.append(word)
-
-    return word_list
-
 if __name__ == "__main__":
-    words_list = clean_up_words('random_sentence.txt')
-    markov_sentence = MarkovChainSecond()
-    print(markov_sentence.random_sentence())
-    print(markov_sentence.random_sentence())
+    words_list = read_text('corpus.txt')
+    # print(words_list)
+    clean_text = cleanup_text(words_list)
+    # print(clean_text)
+    stop_token = stop_token(clean_text)
+    start_token = start_token(clean_text)
+    # print(clean_text)
+    markov_sentence = MarkovChainSecond(stop_token)
+    # print (markov_sentence)
+    print(markov_sentence.random_sentence(5))
     nested_histo = markov_sentence.create_markov_chain()
 
-    print(nested_histo['fish'].sample())
+    # print(nested_histo['fish'].sample())
