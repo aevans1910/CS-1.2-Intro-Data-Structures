@@ -10,9 +10,9 @@ def random_script_order(script, length):
 
         script[selected_word1],script[selected_word2] = script[selected_word2],script[selected_word1]
     return script
-
-script = ['hello', 'earthlings', 'I', 'have', 'come', 'to', 'dominate', 'your', 'planet']
-length = len(script)
-print(random_script_order(script,length))
     
+if __name__ == "__main__":
+    script = ['hello', 'earthlings', 'I', 'have', 'come', 'to', 'dominate', 'your', 'planet']
+    length = len(script)
+    print(random_script_order(script,length))
         

@@ -36,6 +36,10 @@ def display_words():
 
 display_words()
 
+if __name__ == "__main__":
+    filename = '/usr/share/dict/words'
+    word_list = read_words()
+    display_words()
 
 
 
