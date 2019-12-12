@@ -5,8 +5,8 @@ import random
 class MarkovChain(dict):
     def __init__ (self, words, order=1):
         self.order = order
-        for index in range(len(words)-1):
-            self.add_words(words[index],words[index+1])
+        for index in range(len(words)-order):
+            self.add_words(tuple(words[index:index+order]),tuple(words[index+1:index+order+1]))
 
         for key in self.keys():
             self[key] = Dictogram(self[key])   
@@ -18,13 +18,15 @@ class MarkovChain(dict):
 
     def random_sentence(self, length=8):
         sentence = []
+        start_word = random.choice(list(self.keys()))
+        next_word = self[start_word].sample()
+        sentence += list(start_word)
         
         while len(sentence) < 10:
             start_word = random.choice(list(self.keys()))
             next_word = self[start_word].sample()
 
-            sentence.append(start_word)
-            sentence.append(next_word)
+            sentence.append(next_word[self.order-1])
 
             start_word = next_word
         return ' '.join(sentence)
@@ -33,7 +35,7 @@ class MarkovChain(dict):
 if __name__ == "__main__":
     words_list = read_text('corpus.txt')
     # words_list = ["a", "man", "a", "plan", "a", "canal"]
-    markov_sentence = MarkovChain(words_list)
+    markov_sentence = MarkovChain(words_list, 3)
     # print(markov_sentence)
     # for keys in markov_sentence.keys():
     #     print(keys, markov_sentence[keys])
