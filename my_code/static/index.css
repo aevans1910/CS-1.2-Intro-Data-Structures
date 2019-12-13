@@ -1,0 +1,64 @@
+ /* General styling*/
+ body {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    line-height: 1.5em;
+    background-color: bisque;
+}
+
+/* Here is styling for the jumbotron */
+    #jumbotron > .text > h1{
+        display: flex;
+        justify-content: center;
+        font-family: 'Homemade Apple', cursive;
+    }
+
+    #jumbotron > .text > h3{
+        display: flex;
+        justify-content: center;
+        color: black;
+    }
+
+/* Here is styling for the about section */
+
+    #About > .text > h3{
+        display: flex;
+        justify-content: center;
+        font-family: 'Homemade Apple', cursive;
+    }
+
+    #About > .text > p{
+        display: flex;
+        justify-content: center;
+    }
+
+/* Here is styling for the tweet */
+    #tweet > .text{
+        display: flex;
+        justify-content: center;
+    }
+
+    #tweet > .text > h1{
+        display: flex;
+        justify-content: center;
+        font-family: 'Homemade Apple', cursive;
+    }
+
+/* Here is styling for the image */
+
+    .image {
+        display: flex;
+        justify-content: center; 
+    }
+
+    .image > img {
+        display: flex;
+        justify-content: center;
+        height: 500px;
+        width: auto;
+    }
+
+    

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href='/static/styles2.css'>
+    <link href="https://fonts.googleapis.com/css?family=Homemade+Apple|Montserrat&display=swap" rel="stylesheet">
+    <title>Tweet Gen</title>
+</head>
+<body>
+
+    <!-- Hero -->
+    <div id="jumbotron">
+        <div class="text">
+            <h1>Tweet generator!</h1> <br>
+            <h3>Create your own Edgar Allen Poe tweets!</h3>
+        </div>
+    </div>
+
+    <!-- About -->
+    <div id="About">
+        <div class="text">
+            <h3>About</h3>
+            <p>With this porgram, you can randomly generate tweets based off of the Edgar
+                Allen Poe volume 1 and 2 anthologies. The computer will randomly select a
+                string of words that make as much gramatical sense as possible for you to 
+                make your tweet!
+            </p>
+        </div>
+    </div>
+
+    <!-- Tweet  -->
+    <div id="tweet">
+        <div class="text">
+            {% if gen %}
+                <h1>{{ gen }}</h1>
+            {% endif %}
+        </div>
+    </div>  
+
+    <!-- Image -->
+    <div class="image">
+        <img src="/static/images/EdgarAllanPoe.jpg">
+    </div>
+    
+</body>
+</html>
